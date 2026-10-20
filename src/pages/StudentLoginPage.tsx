@@ -4,12 +4,7 @@ import {
   Eye,
   EyeOff,
   LogIn,
-  GraduationCap,
-  ShieldAlert,
-  Sparkles,
-  ArrowRight,
   AlertCircle,
-  CheckCircle,
 } from 'lucide-react';
 import { authService } from '../services/authService';
 
@@ -18,8 +13,8 @@ export const StudentLoginPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get('redirect') || '/dashboard';
 
-  const [email, setEmail] = useState('aarav.sharma@example.com');
-  const [password, setPassword] = useState('password123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -38,15 +33,6 @@ export const StudentLoginPage: React.FC = () => {
     }
   };
 
-  const handleQuickDemoLogin = () => {
-    const res = authService.loginDemoStudent();
-    if (res.success) {
-      navigate(redirect);
-    } else {
-      setError(res.message);
-    }
-  };
-
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
       <div className="max-w-md w-full space-y-8 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl">
@@ -62,18 +48,7 @@ export const StudentLoginPage: React.FC = () => {
             Student Career Portal Login
           </h2>
           <p className="text-xs text-slate-500">
-            Sign in to access your enrollments, course lessons, and certificates.
-          </p>
-        </div>
-
-        {/* Demo Mode Notice Box */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900 space-y-1">
-          <div className="flex items-center gap-1.5 font-bold text-blue-950">
-            <ShieldAlert size={15} className="text-blue-600" />
-            <span>Frontend Demo Session</span>
-          </div>
-          <p className="text-slate-600 text-[11px] leading-relaxed">
-            Passwords are validated for demo simulation only and are never saved to disk. Use the pre-filled credentials or create a new student account.
+            Sign in to access your course syllabus, assignments, and certificates.
           </p>
         </div>
 
@@ -96,7 +71,7 @@ export const StudentLoginPage: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g. aarav.sharma@example.com"
+              placeholder="e.g. yourname@example.com"
               className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -111,7 +86,7 @@ export const StudentLoginPage: React.FC = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password"
+                placeholder="Enter your password"
                 className="w-full pl-3.5 pr-10 py-2.5 text-xs sm:text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               <button
@@ -134,23 +109,11 @@ export const StudentLoginPage: React.FC = () => {
           </button>
         </form>
 
-        {/* Quick Demo One-Click Fill */}
-        <div className="pt-2">
-          <button
-            type="button"
-            onClick={handleQuickDemoLogin}
-            className="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-colors flex items-center justify-center gap-2 border border-slate-200"
-          >
-            <Sparkles size={14} className="text-blue-600" />
-            <span>One-Click Login as Demo Student (Aarav Sharma)</span>
-          </button>
-        </div>
-
         {/* Bottom register link */}
         <div className="text-center pt-2 text-xs text-slate-500 border-t border-slate-100">
           <span>New student? </span>
           <Link to="/register" className="text-blue-600 hover:underline font-semibold">
-            Create a demo account
+            Register for an account
           </Link>
         </div>
       </div>

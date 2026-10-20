@@ -34,7 +34,7 @@ export const StudentRegisterPage: React.FC = () => {
     }
 
     if (password.length < 6) {
-      setError('Password should be at least 6 characters for demo purposes.');
+      setError('Password must be at least 6 characters.');
       return;
     }
 
@@ -71,18 +71,7 @@ export const StudentRegisterPage: React.FC = () => {
             Student Portal Registration
           </h2>
           <p className="text-xs text-slate-500">
-            Create your demo student profile to enroll in courses and track certificates.
-          </p>
-        </div>
-
-        {/* Demo Mode Notice */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-blue-900 space-y-1">
-          <div className="flex items-center gap-1.5 font-bold text-blue-950">
-            <ShieldAlert size={15} className="text-blue-600" />
-            <span>Frontend Prototype Notice</span>
-          </div>
-          <p className="text-slate-600 text-[11px] leading-relaxed">
-            Student profile records are saved to your browser's LocalStorage. Real passwords are not stored.
+            Create your student account to enroll in courses and track certificates.
           </p>
         </div>
 
@@ -183,7 +172,7 @@ export const StudentRegisterPage: React.FC = () => {
             className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-blue-500/25 transition-all flex items-center justify-center gap-2"
           >
             <UserPlus size={16} />
-            <span>{loading ? 'Creating Demo Account...' : 'Complete Registration'}</span>
+            <span>{loading ? 'Creating Account...' : 'Complete Registration'}</span>
           </button>
         </form>
 

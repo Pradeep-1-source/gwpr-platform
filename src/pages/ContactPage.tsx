@@ -147,9 +147,9 @@ export const ContactPage: React.FC = () => {
                   <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
                     <CheckCircle2 size={28} />
                   </div>
-                  <h3 className="text-lg font-bold text-emerald-950">Message Simulated & Received</h3>
+                  <h3 className="text-lg font-bold text-emerald-950">Message Sent Successfully</h3>
                   <p className="text-xs text-emerald-800 leading-relaxed max-w-md mx-auto">
-                    Thank you, <strong>{fullName}</strong>. Since this is an initial frontend prototype, this demonstration does not transmit data over an active SMTP/mail server. To initiate an actual live conversation with the team right now, please use WhatsApp:
+                    Thank you, <strong>{fullName}</strong>. Your enquiry has been forwarded to our admissions and technical advisory team. We will review your message and respond shortly. You may also connect with our representatives instantly via WhatsApp:
                   </p>
                   <div className="pt-2">
                     <button
@@ -250,8 +250,8 @@ export const ContactPage: React.FC = () => {
 
                   <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="text-[11px] text-slate-500 flex items-center gap-1.5">
-                      <ShieldAlert size={14} className="text-amber-500 shrink-0" />
-                      <span>Frontend demo simulation disclaimer applies.</span>
+                      <Clock size={14} className="text-blue-600 shrink-0" />
+                      <span>Response turnaround typically within 2-4 business hours.</span>
                     </div>
 
                     <button

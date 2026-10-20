@@ -162,11 +162,6 @@ export const CertificateTemplate: React.FC<CertificateTemplateProps> = ({
             <p className="text-[8px] text-slate-400 uppercase tracking-wider">{certificate.companyName}</p>
           </div>
         </div>
-
-        {/* Prototype Watermark Disclaimer Footer */}
-        <div className="pt-2 text-center border-t border-slate-100 text-[8px] text-slate-400 italic">
-          Prototype Certificate generated for demonstration. Verification records persist in demo LocalStorage.
-        </div>
       </div>
     </div>
   );

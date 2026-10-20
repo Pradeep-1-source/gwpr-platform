@@ -31,22 +31,71 @@ export const certificateService = {
     return certs.find((c) => c.id.toUpperCase() === cleanId);
   },
 
-  // Async verification querying Supabase Cloud Database first, falling back to LocalStorage
-  async verifyCertificate(id: string): Promise<Certificate | undefined> {
+  // Decode and cache certificate data from QR payload if present
+  decodePayload(payload: string): Certificate | null {
+    try {
+      const json = decodeURIComponent(atob(payload));
+      const data = JSON.parse(json);
+      if (!data.id) return null;
+
+      const cert: Certificate = {
+        id: data.id,
+        studentId: data.studentId || 'std-verified',
+        studentName: data.name || data.studentName || 'Student Recipient',
+        courseId: data.courseId || 'course-verified',
+        courseTitle: data.course || data.courseTitle || 'GWPR Certified Program',
+        enrollmentId: data.enrollmentId || 'enr-verified',
+        completionDate: data.completionDate || data.date || 'Completed',
+        issueDate: data.issueDate || data.completionDate || 'Issued',
+        verificationStatus: (data.status as any) || 'Valid',
+        signatoryName: data.signatoryName || 'Dr. Rajesh Vardhan',
+        signatoryTitle: data.signatoryTitle || 'Head of Academics & Technical Certifications',
+        companyName: data.companyName || 'GWPR Private Limited',
+        verificationUrl: typeof window !== 'undefined' ? window.location.href.split('?')[0] : '',
+      };
+
+      // Cache locally on this device so subsequent searches by ID immediately work
+      const all = this.getAllCertificates();
+      if (!all.some((c) => c.id.toUpperCase() === cert.id.toUpperCase())) {
+        setItem(KEYS.CERTIFICATES, [cert, ...all]);
+        window.dispatchEvent(new Event('gwpr_certificates_updated'));
+      }
+      return cert;
+    } catch (e) {
+      console.warn('Error parsing certificate QR payload:', e);
+      return null;
+    }
+  },
+
+  // Async verification querying Supabase Cloud Database first, then payload, then LocalStorage
+  async verifyCertificate(id: string, payload?: string): Promise<Certificate | undefined> {
     if (!id) return undefined;
     const cleanId = id.trim().toUpperCase();
 
-    // 1. Try Supabase cloud database (allows universal cross-device verification from any phone/laptop)
+    // 1. If encoded QR payload is provided, decode and cache
+    if (payload) {
+      const fromPayload = this.decodePayload(payload);
+      if (fromPayload && fromPayload.id.toUpperCase() === cleanId) {
+        return fromPayload;
+      }
+    }
+
+    // 2. Try Supabase cloud database (universal cross-device verification from any phone/laptop)
     try {
       const fromSupabase = await supabaseDataService.getCertificateById(cleanId);
       if (fromSupabase) {
+        // Cache locally for offline/fast future lookups
+        const all = this.getAllCertificates();
+        if (!all.some((c) => c.id.toUpperCase() === fromSupabase.id.toUpperCase())) {
+          setItem(KEYS.CERTIFICATES, [fromSupabase, ...all]);
+        }
         return fromSupabase;
       }
     } catch (e) {
       console.warn('Supabase certificate check error, falling back to local records:', e);
     }
 
-    // 2. Fallback to LocalStorage
+    // 3. Fallback to LocalStorage
     return this.getCertificateById(cleanId);
   },
 
@@ -97,9 +146,23 @@ export const certificateService = {
       year: 'numeric',
     });
 
-    // Verification URL pointing to configurable base URL
-    const baseUrl = config.baseUrl.replace(/\/$/, '');
-    const verificationUrl = `${baseUrl}/verify/${certId}`;
+    // Encode verification payload for cross-device QR scanning
+    const payloadObject = {
+      id: certId,
+      name: student.fullName,
+      course: course.title,
+      completionDate: formattedDate,
+      issueDate: formattedDate,
+      signatoryName: config.signatoryName || 'Dr. Rajesh Vardhan',
+      signatoryTitle: config.signatoryTitle || 'Head of Academics & Technical Certifications',
+      companyName: config.companyName || 'GWPR Private Limited',
+      status: 'Valid',
+    };
+    const encodedPayload = btoa(encodeURIComponent(JSON.stringify(payloadObject)));
+
+    // Verification URL pointing to configurable base URL with QR payload
+    const baseUrl = (typeof window !== 'undefined' && window.location.origin) ? window.location.origin : config.baseUrl.replace(/\/$/, '');
+    const verificationUrl = `${baseUrl}/verify/${certId}?d=${encodedPayload}`;
 
     const newCertificate: Certificate = {
       id: certId,

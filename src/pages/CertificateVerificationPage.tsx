@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams, Link } from 'react-router-dom';
 import {
   ShieldCheck,
-  ShieldAlert,
   Search,
   Camera,
   CheckCircle2,
   XCircle,
   Award,
-  Calendar,
-  User,
-  BookOpen,
-  ArrowRight,
+  Copy,
+  Check,
   ExternalLink,
-  Sparkles,
-  Info,
-  Download,
+  Share2,
 } from 'lucide-react';
 import { certificateService } from '../services/certificateService';
 import { Certificate } from '../types';
 import { QRCodeScanner } from '../components/QRCodeScanner';
-import { CertificatePDFGenerator } from '../components/CertificatePDFGenerator';
 
 export const CertificateVerificationPage: React.FC = () => {
   const { certificateId } = useParams<{ certificateId?: string }>();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const [inputCertId, setInputCertId] = useState(certificateId || '');
@@ -31,12 +26,12 @@ export const CertificateVerificationPage: React.FC = () => {
   const [certificate, setCertificate] = useState<Certificate | null>(null);
   const [searchAttempted, setSearchAttempted] = useState(false);
   const [scannerOpen, setScannerOpen] = useState(false);
-  const [certModalOpen, setCertModalOpen] = useState(false);
-
   const [isVerifying, setIsVerifying] = useState(false);
-  const [sourceNote, setSourceNote] = useState<string | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
 
-  const verifyCertificateId = async (idToVerify: string) => {
+  const rawPayload = searchParams.get('d') || searchParams.get('cert') || undefined;
+
+  const verifyCertificateId = async (idToVerify: string, payload?: string) => {
     const clean = idToVerify.trim().toUpperCase();
     setSearchedId(clean);
     setSearchAttempted(true);
@@ -48,7 +43,7 @@ export const CertificateVerificationPage: React.FC = () => {
 
     setIsVerifying(true);
     try {
-      const found = await certificateService.verifyCertificate(clean);
+      const found = await certificateService.verifyCertificate(clean, payload);
       setCertificate(found || null);
     } catch {
       setCertificate(null);
@@ -60,9 +55,9 @@ export const CertificateVerificationPage: React.FC = () => {
   useEffect(() => {
     if (certificateId) {
       setInputCertId(certificateId);
-      verifyCertificateId(certificateId);
+      verifyCertificateId(certificateId, rawPayload);
     }
-  }, [certificateId]);
+  }, [certificateId, rawPayload]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,14 +68,33 @@ export const CertificateVerificationPage: React.FC = () => {
 
   const handleScanSuccess = (decodedText: string) => {
     setScannerOpen(false);
-    // Extract certificate ID if full URL is scanned
-    let extractedId = decodedText.trim();
-    if (extractedId.includes('/verify/')) {
-      const parts = extractedId.split('/verify/');
-      extractedId = parts[parts.length - 1];
+    let extracted = decodedText.trim();
+    let query = '';
+
+    if (extracted.includes('?')) {
+      const [base, q] = extracted.split('?');
+      extracted = base;
+      query = q;
     }
-    setInputCertId(extractedId);
-    navigate(`/verify/${encodeURIComponent(extractedId.toUpperCase())}`);
+
+    if (extracted.includes('/verify/')) {
+      const parts = extracted.split('/verify/');
+      extracted = parts[parts.length - 1];
+    }
+
+    setInputCertId(extracted);
+    const targetUrl = query
+      ? `/verify/${encodeURIComponent(extracted.toUpperCase())}?${query}`
+      : `/verify/${encodeURIComponent(extracted.toUpperCase())}`;
+    navigate(targetUrl);
+  };
+
+  const handleCopyLink = () => {
+    if (!certificate) return;
+    const url = `${window.location.origin}/verify/${certificate.id}`;
+    navigator.clipboard.writeText(url);
+    setLinkCopied(true);
+    setTimeout(() => setLinkCopied(false), 2000);
   };
 
   return (
@@ -91,13 +105,13 @@ export const CertificateVerificationPage: React.FC = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <ShieldCheck size={16} />
-            <span>Official Credential Verification System</span>
+            <span>Official Credential Verification Registry</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-white">
             Verify GWPR Certificate Authenticity
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
-            Validate the integrity and completion status of credentials issued by GWPR Private Limited for students, recruiters, and employers.
+            Validate the integrity, completion status, and official issuance of credentials awarded by GWPR Private Limited.
           </p>
         </div>
       </section>
@@ -119,7 +133,7 @@ export const CertificateVerificationPage: React.FC = () => {
                   type="text"
                   value={inputCertId}
                   onChange={(e) => setInputCertId(e.target.value)}
-                  placeholder="e.g. GWPR-CERT-2026-A7K92X"
+                  placeholder="Enter Certificate ID"
                   className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono uppercase text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
                 />
               </div>
@@ -137,37 +151,15 @@ export const CertificateVerificationPage: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-blue-600/30 transition-all"
+                  disabled={isVerifying}
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm shadow-md shadow-blue-600/30 transition-all disabled:opacity-50"
                 >
                   <ShieldCheck size={16} />
-                  <span>Verify Certificate</span>
+                  <span>{isVerifying ? 'Verifying...' : 'Verify Certificate'}</span>
                 </button>
               </div>
             </div>
           </form>
-
-          {/* Quick Demo Pre-fills */}
-          <div className="pt-2 flex flex-wrap items-center gap-2 text-xs text-slate-500 border-t border-slate-100">
-            <span className="font-medium text-slate-700">Quick Test Records:</span>
-            <button
-              onClick={() => {
-                setInputCertId('GWPR-CERT-2026-A7K92X');
-                navigate('/verify/GWPR-CERT-2026-A7K92X');
-              }}
-              className="px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 hover:bg-blue-100 font-mono text-[11px] font-semibold transition-colors"
-            >
-              GWPR-CERT-2026-A7K92X (Valid)
-            </button>
-            <button
-              onClick={() => {
-                setInputCertId('GWPR-FAKE-2026-INVALID');
-                navigate('/verify/GWPR-FAKE-2026-INVALID');
-              }}
-              className="px-2.5 py-1 rounded-md bg-red-50 text-red-700 hover:bg-red-100 font-mono text-[11px] font-semibold transition-colors"
-            >
-              GWPR-FAKE-2026-INVALID (Invalid)
-            </button>
-          </div>
         </div>
 
         {/* VERIFICATION RESULT STATE */}
@@ -180,15 +172,15 @@ export const CertificateVerificationPage: React.FC = () => {
                 {/* Result Status Banner */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-xs">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-xs shrink-0">
                       <CheckCircle2 size={26} />
                     </div>
                     <div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
                           {certificate.verificationStatus === 'Valid' ? 'Verified Credential' : 'Revoked'}
                         </span>
-                        <span className="text-xs text-slate-400 font-mono">ID: {certificate.id}</span>
+                        <span className="text-xs text-slate-500 font-mono font-bold">ID: {certificate.id}</span>
                       </div>
                       <h3 className="text-xl font-extrabold text-slate-900 mt-0.5">
                         Authentic Certificate Found
@@ -196,13 +188,37 @@ export const CertificateVerificationPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => setCertModalOpen(true)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0B192C] hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-colors self-start sm:self-auto"
-                  >
-                    <Download size={14} />
-                    <span>View & Download PDF</span>
-                  </button>
+                  {/* Share / Copy Verification Link */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleCopyLink}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-colors"
+                      title="Copy public verification link"
+                    >
+                      {linkCopied ? (
+                        <>
+                          <Check size={15} className="text-emerald-400" />
+                          <span>Link Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={15} />
+                          <span>Copy Link</span>
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setScannerOpen(true)}
+                      className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-medium"
+                      title="Scan another QR"
+                    >
+                      <Camera size={15} className="text-blue-600" />
+                      <span className="hidden sm:inline">Scan Next</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Certificate Meta Details */}
@@ -237,16 +253,32 @@ export const CertificateVerificationPage: React.FC = () => {
                 </div>
 
                 {/* Signatory & Issuance Verification Note */}
-                <div className="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200/80 flex items-center justify-between text-xs text-emerald-900">
+                <div className="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-emerald-900">
                   <div className="flex items-center gap-2">
-                    <Award size={18} className="text-emerald-700" />
+                    <Award size={18} className="text-emerald-700 shrink-0" />
                     <span>
                       Authorized Signatory: <strong>{certificate.signatoryName}</strong> ({certificate.signatoryTitle})
                     </span>
                   </div>
-                  <span className="text-[11px] text-emerald-700 font-semibold font-mono">
+                  <span className="text-[11px] text-emerald-700 font-semibold font-mono shrink-0">
                     Audit Status: MATCHED
                   </span>
+                </div>
+
+                {/* Verification Link Row */}
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 truncate">
+                    <ShieldCheck size={14} className="text-emerald-600 shrink-0" />
+                    <span className="font-mono text-[11px] truncate">
+                      {window.location.origin}/verify/{certificate.id}
+                    </span>
+                  </div>
+                  <button
+                    onClick={handleCopyLink}
+                    className="text-blue-600 hover:underline font-semibold text-[11px] shrink-0 self-start sm:self-auto"
+                  >
+                    {linkCopied ? 'Copied to Clipboard' : 'Copy Verification URL'}
+                  </button>
                 </div>
               </div>
             ) : (
@@ -260,22 +292,20 @@ export const CertificateVerificationPage: React.FC = () => {
                   <p className="text-xs text-slate-500 font-mono">Searched ID: "{searchedId}"</p>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                  No matching record exists in the current prototype records. Please double-check the identifier entered or ensure the certificate was generated in this browser session.
+                  No matching record exists in the credential registry for this identifier. Please double-check the ID entered or scan the certificate's official QR code.
                 </p>
 
-                <div className="pt-2 flex justify-center gap-3">
+                <div className="pt-2 flex flex-wrap justify-center gap-3">
                   <button
-                    onClick={() => {
-                      setInputCertId('GWPR-CERT-2026-A7K92X');
-                      navigate('/verify/GWPR-CERT-2026-A7K92X');
-                    }}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold shadow-xs hover:bg-blue-500"
+                    onClick={() => setScannerOpen(true)}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold shadow-xs"
                   >
-                    Test with Sample Valid ID
+                    <Camera size={15} />
+                    <span>Scan Certificate QR Code</span>
                   </button>
                   <Link
                     to="/contact"
-                    className="px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-xs font-semibold hover:bg-slate-200"
+                    className="px-5 py-2.5 bg-slate-100 text-slate-700 rounded-xl text-xs font-semibold hover:bg-slate-200"
                   >
                     Contact Registrar
                   </Link>
@@ -285,17 +315,6 @@ export const CertificateVerificationPage: React.FC = () => {
           </div>
         )}
 
-        {/* Honest Prototype Notice on Cross-Device Verification */}
-        <div className="bg-slate-100 rounded-2xl p-5 border border-slate-200 text-xs text-slate-600 space-y-2">
-          <div className="flex items-center gap-2 font-bold text-slate-800">
-            <Info size={16} className="text-blue-600 shrink-0" />
-            <span>Frontend Prototype Architecture Note:</span>
-          </div>
-          <p className="leading-relaxed">
-            In this frontend-only prototype version, verification queries against your browser's LocalStorage records and pre-seeded demonstration data. A cross-device verification architecture (allowing a phone to verify a certificate generated on a separate PC) will be enabled when connected to a cloud API database on Vercel.
-          </p>
-        </div>
-
       </section>
 
       {/* Camera QR Scanner Modal */}
@@ -304,15 +323,6 @@ export const CertificateVerificationPage: React.FC = () => {
         onClose={() => setScannerOpen(false)}
         onScanSuccess={handleScanSuccess}
       />
-
-      {/* Certificate Preview/Export Modal */}
-      {certificate && (
-        <CertificatePDFGenerator
-          certificate={certificate}
-          isOpen={certModalOpen}
-          onClose={() => setCertModalOpen(false)}
-        />
-      )}
     </div>
   );
 };

@@ -18,6 +18,7 @@ import {
   FileCheck,
   Send,
   Zap,
+  Camera,
 } from 'lucide-react';
 import { courseService } from '../services/courseService';
 import { enrollmentService } from '../services/enrollmentService';
@@ -209,24 +210,24 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Instant Verification Mini-Card */}
+                {/* Instant Verification Registry */}
                 <div className="bg-slate-950/70 rounded-xl p-4 border border-slate-800 space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="p-1.5 bg-white rounded">
-                      <ShieldCheck size={28} className="text-[#0B192C]" />
+                    <div className="p-1.5 bg-blue-600/20 text-cyan-400 rounded-lg border border-cyan-500/30">
+                      <ShieldCheck size={28} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-white">ID: GWPR-CERT-2026-A7K92X</span>
+                        <span className="text-xs font-bold text-white">Credential Verification System</span>
                       </div>
-                      <p className="text-[11px] text-slate-400 truncate">Student: Aarav Sharma</p>
+                      <p className="text-[11px] text-slate-400 truncate">QR Scanner & Online Registry</p>
                     </div>
                   </div>
                   <Link
-                    to="/verify/GWPR-CERT-2026-A7K92X"
-                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-blue-600/30 hover:bg-blue-600/50 text-cyan-300 font-medium text-xs border border-cyan-500/30 transition-colors"
+                    to="/verify"
+                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs shadow-md transition-colors"
                   >
-                    <span>Test Instant Verification</span>
+                    <span>Verify Credential Authenticity</span>
                     <ArrowRight size={13} />
                   </Link>
                 </div>
@@ -505,7 +506,7 @@ export const HomePage: React.FC = () => {
                   type="text"
                   value={verifyInput}
                   onChange={(e) => setVerifyInput(e.target.value)}
-                  placeholder="Enter ID: e.g. GWPR-CERT-2026-A7K92X"
+                  placeholder="Enter Certificate ID"
                   className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-700 rounded-xl text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 font-mono uppercase"
                 />
               </div>
@@ -519,17 +520,9 @@ export const HomePage: React.FC = () => {
             </form>
 
             <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-400">
-              <span className="text-cyan-300 font-medium">Try Sample ID:</span>
-              <button
-                type="button"
-                onClick={() => setVerifyInput('GWPR-CERT-2026-A7K92X')}
-                className="underline hover:text-white font-mono bg-slate-800/80 px-2 py-1 rounded border border-slate-700"
-              >
-                GWPR-CERT-2026-A7K92X
-              </button>
-              <span>•</span>
               <Link to="/verify" className="text-emerald-400 hover:underline flex items-center gap-1 font-medium">
-                <span>Open QR Camera Scanner</span>
+                <Camera size={14} />
+                <span>Open Camera QR Scanner</span>
                 <ArrowRight size={12} />
               </Link>
             </div>

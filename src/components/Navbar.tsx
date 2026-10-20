@@ -137,14 +137,6 @@ export const Navbar: React.FC = () => {
               </div>
             )}
 
-            {/* Admin Demo Badge Link */}
-            <Link
-              to="/admin"
-              className="text-[11px] font-medium text-slate-400 hover:text-amber-400 bg-slate-900/60 px-2.5 py-1.5 rounded border border-slate-700/60 hover:border-amber-500/40 transition-colors"
-              title="Admin Demo Workspace"
-            >
-              Admin Demo
-            </Link>
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -236,17 +228,6 @@ export const Navbar: React.FC = () => {
                 </Link>
               </div>
             )}
-
-            <div className="pt-2 flex justify-between items-center text-xs text-slate-400">
-              <Link
-                to="/admin"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-amber-400 hover:underline flex items-center gap-1"
-              >
-                <span>Demo Admin Portal</span>
-              </Link>
-              <span className="text-[10px] text-slate-500">v1.0 Demo Mode</span>
-            </div>
           </div>
         </div>
       )}

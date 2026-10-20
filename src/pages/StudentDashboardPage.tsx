@@ -23,7 +23,6 @@ import { courseService } from '../services/courseService';
 import { certificateService } from '../services/certificateService';
 import { Enrollment, Course, Certificate, DemoStudent } from '../types';
 import { CertificatePDFGenerator } from '../components/CertificatePDFGenerator';
-import { ResetDataModal } from '../components/ResetDataModal';
 
 export const StudentDashboardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -35,7 +34,6 @@ export const StudentDashboardPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'enrollments' | 'certificates' | 'profile'>('enrollments');
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
   const [certModalOpen, setCertModalOpen] = useState(false);
-  const [resetModalOpen, setResetModalOpen] = useState(false);
 
   // Profile Edit State
   const [editName, setEditName] = useState('');
@@ -203,14 +201,6 @@ export const StudentDashboardPage: React.FC = () => {
             >
               <span>+ Enroll in New Course</span>
             </Link>
-
-            <button
-              onClick={() => setResetModalOpen(true)}
-              className="p-2 text-slate-400 hover:text-amber-600 rounded-lg hover:bg-slate-100 transition-colors"
-              title="Reset Demo Data"
-            >
-              <RotateCcw size={16} />
-            </button>
           </div>
         </div>
 
@@ -372,13 +362,13 @@ export const StudentDashboardPage: React.FC = () => {
                         <span>Public Verification Link</span>
                       </Link>
 
-                      <button
-                        onClick={() => handleViewCert(cert)}
+                      <Link
+                        to={`/verify/${cert.id}`}
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shadow-sm transition-colors"
                       >
-                        <Download size={14} />
-                        <span>Preview & Download PDF</span>
-                      </button>
+                        <ShieldCheck size={14} />
+                        <span>View Verified Credential</span>
+                      </Link>
                     </div>
                   </div>
                 ))}
@@ -434,7 +424,7 @@ export const StudentDashboardPage: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Email Address (Demo Account)
+                  Email Address
                 </label>
                 <input
                   type="email"
@@ -442,9 +432,6 @@ export const StudentDashboardPage: React.FC = () => {
                   value={student.email}
                   className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 bg-slate-100 text-slate-500 rounded-xl cursor-not-allowed"
                 />
-                <span className="text-[10px] text-slate-400 mt-0.5 block">
-                  Email identifier is locked to this demo session.
-                </span>
               </div>
 
               <div>
@@ -483,7 +470,7 @@ export const StudentDashboardPage: React.FC = () => {
 
       </div>
 
-      {/* Certificate PDF Generator Modal */}
+      {/* Certificate Modal */}
       {selectedCert && (
         <CertificatePDFGenerator
           certificate={selectedCert}
@@ -491,13 +478,6 @@ export const StudentDashboardPage: React.FC = () => {
           onClose={() => setCertModalOpen(false)}
         />
       )}
-
-      {/* Reset Confirmation Modal */}
-      <ResetDataModal
-        isOpen={resetModalOpen}
-        onClose={() => setResetModalOpen(false)}
-        onSuccess={loadData}
-      />
     </div>
   );
 };

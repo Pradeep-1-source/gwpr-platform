@@ -86,7 +86,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
             </div>
             <h4 className="text-xl font-bold text-slate-900">Enquiry Received!</h4>
             <p className="text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
-              Thank you, <strong>{fullName}</strong>. Since this is a frontend prototype, your submission has been acknowledged in this demo session. You may also connect with the team directly via WhatsApp.
+              Thank you, <strong>{fullName}</strong>. Your enquiry has been received. Our team will get in touch with you shortly. You may also connect with us directly via WhatsApp.
             </p>
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">

@@ -150,22 +150,13 @@ export const CourseLearningPage: React.FC = () => {
               </div>
             </div>
 
-            {enrollment.progress === 100 ? (
+            {enrollment.progress === 100 && (
               <button
                 onClick={handleGenerateCertificate}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-md shadow-emerald-600/30 transition-all animate-pulse"
               >
                 <Award size={15} />
                 <span>Get Certificate</span>
-              </button>
-            ) : (
-              <button
-                onClick={handleFastTrackComplete}
-                className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 text-xs font-medium"
-                title="Demo shortcut: Mark all complete to test certificate issuance immediately"
-              >
-                <Sparkles size={13} />
-                <span>Demo 100% Complete</span>
               </button>
             )}
           </div>
@@ -242,25 +233,6 @@ export const CourseLearningPage: React.FC = () => {
                   </div>
                 </div>
               ))}
-            </div>
-
-            {/* Prototype Demo Fast-Track Helpers */}
-            <div className="pt-2 border-t border-slate-100 space-y-2">
-              <button
-                onClick={handleFastTrackComplete}
-                className="w-full py-2 px-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-semibold flex items-center justify-center gap-1.5 border border-amber-200"
-              >
-                <Sparkles size={14} className="text-amber-600" />
-                <span>Mark All Complete (Demo Fast-Track)</span>
-              </button>
-
-              <button
-                onClick={handleResetProgress}
-                className="w-full py-1.5 px-3 rounded-lg text-slate-500 hover:text-slate-700 hover:bg-slate-100 text-[11px] font-medium flex items-center justify-center gap-1.5"
-              >
-                <RotateCcw size={12} />
-                <span>Reset Course Progress</span>
-              </button>
             </div>
           </div>
         </div>

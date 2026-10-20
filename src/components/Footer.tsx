@@ -195,24 +195,7 @@ export const Footer: React.FC = () => {
                   Contact & Enquiry
                 </Link>
               </li>
-              <li>
-                <Link to="/admin" className="text-amber-400/80 hover:text-amber-400 transition-colors">
-                  Admin Demo Panel
-                </Link>
-              </li>
             </ul>
-          </div>
-        </div>
-
-        {/* Prototype Transparency Notice */}
-        <div className="mt-12 pt-8 border-t border-slate-800 text-xs text-slate-500 leading-relaxed flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-center md:text-left max-w-3xl">
-            <strong>Prototype Disclaimer:</strong> This portal is a frontend demonstration using browser LocalStorage. No guaranteed job placement, government recognition, or third-party accreditation is claimed or fabricated. Universal certificate verification requires backend database synchronization.
-          </p>
-          <div className="flex items-center gap-3 shrink-0">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] bg-slate-800 text-slate-400 border border-slate-700">
-              Frontend Demo Prototype
-            </span>
           </div>
         </div>
 
