@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   RotateCcw,
   ExternalLink,
+  Download,
 } from 'lucide-react';
 import { enrollmentService } from '../services/enrollmentService';
 import { courseService } from '../services/courseService';
@@ -150,13 +151,22 @@ export const CourseLearningPage: React.FC = () => {
               </div>
             </div>
 
-            {enrollment.progress === 100 && (
+            {enrollment.progress === 100 ? (
               <button
                 onClick={handleGenerateCertificate}
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-md shadow-emerald-600/30 transition-all animate-pulse"
               >
-                <Award size={15} />
-                <span>Get Certificate</span>
+                <Download size={14} />
+                <span>Download Certificate</span>
+              </button>
+            ) : (
+              <button
+                onClick={handleFastTrackComplete}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shadow-sm transition-all"
+                title="Mark all lessons as complete to finish course"
+              >
+                <CheckCircle2 size={14} />
+                <span>Make Complete</span>
               </button>
             )}
           </div>
@@ -234,6 +244,27 @@ export const CourseLearningPage: React.FC = () => {
                 </div>
               ))}
             </div>
+
+            {/* Complete Course Action */}
+            <div className="pt-3 border-t border-slate-100">
+              {enrollment.progress === 100 ? (
+                <button
+                  onClick={handleGenerateCertificate}
+                  className="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-colors"
+                >
+                  <Download size={14} />
+                  <span>Download Certificate</span>
+                </button>
+              ) : (
+                <button
+                  onClick={handleFastTrackComplete}
+                  className="w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
+                >
+                  <CheckCircle2 size={15} />
+                  <span>Make Course Complete</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -295,13 +326,21 @@ export const CourseLearningPage: React.FC = () => {
                   </span>
                 </button>
 
-                {enrollment.progress === 100 && (
+                {enrollment.progress === 100 ? (
                   <button
                     onClick={handleGenerateCertificate}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-bold shadow-md shadow-amber-500/25 transition-all"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-600/25 transition-all animate-pulse"
                   >
-                    <Award size={16} />
-                    <span>Generate Official Certificate</span>
+                    <Download size={15} />
+                    <span>Download Certificate</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleFastTrackComplete}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-sm transition-all"
+                  >
+                    <CheckCircle2 size={15} className="text-cyan-400" />
+                    <span>Make Course Complete</span>
                   </button>
                 )}
               </div>

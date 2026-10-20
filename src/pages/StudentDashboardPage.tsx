@@ -362,13 +362,13 @@ export const StudentDashboardPage: React.FC = () => {
                         <span>Public Verification Link</span>
                       </Link>
 
-                      <Link
-                        to={`/verify/${cert.id}`}
+                      <button
+                        onClick={() => handleViewCert(cert)}
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shadow-sm transition-colors"
                       >
-                        <ShieldCheck size={14} />
-                        <span>View Verified Credential</span>
-                      </Link>
+                        <Download size={14} />
+                        <span>Download Certificate</span>
+                      </button>
                     </div>
                   </div>
                 ))}

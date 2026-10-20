@@ -3,7 +3,17 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Certificate } from '../types';
 import { CertificateTemplate } from './CertificateTemplate';
-import { Download, Printer, Copy, Check, ExternalLink, X, ShieldCheck } from 'lucide-react';
+import {
+  Download,
+  Printer,
+  Copy,
+  Check,
+  ExternalLink,
+  X,
+  ShieldCheck,
+  Camera,
+  Award,
+} from 'lucide-react';
 
 interface CertificatePDFGeneratorProps {
   certificate: Certificate;
@@ -17,14 +27,21 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
   onClose,
 }) => {
   const [downloading, setDownloading] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedId, setCopiedId] = useState(false);
 
   if (!isOpen) return null;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(certificate.verificationUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2000);
+  };
+
+  const handleCopyId = () => {
+    navigator.clipboard.writeText(certificate.id);
+    setCopiedId(true);
+    setTimeout(() => setCopiedId(false), 2000);
   };
 
   const handlePrint = () => {
@@ -71,28 +88,94 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden flex flex-col max-h-[95vh] border border-slate-700 animate-in fade-in zoom-in-95 duration-200">
         
         {/* Modal Top Bar */}
-        <div className="bg-[#0B192C] text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
+        <div className="bg-[#0B192C] text-white px-5 py-3.5 flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-cyan-400">
-              <ShieldCheck size={18} />
+            <div className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-cyan-400 shadow-inner">
+              <Award size={20} />
             </div>
             <div>
-              <h3 className="font-bold text-base sm:text-lg">Certificate Preview & Export</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-bold text-sm sm:text-base">Certificate Issued</h3>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase">
+                  Verified
+                </span>
+              </div>
               <p className="text-xs text-slate-400 font-mono">ID: {certificate.id}</p>
             </div>
           </div>
 
-          <button
-            onClick={onClose}
-            className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors"
-            aria-label="Close modal"
-          >
-            <X size={20} />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleDownloadPDF}
+              disabled={downloading}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-md shadow-emerald-600/30 transition-all disabled:opacity-50"
+            >
+              <Download size={14} />
+              <span>{downloading ? 'Downloading...' : 'Download PDF'}</span>
+            </button>
+            <button
+              onClick={onClose}
+              className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* Credentials & Verification Banner (ID, Scanner, Link) */}
+        <div className="bg-slate-900 text-slate-200 px-5 py-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+          {/* Certificate ID */}
+          <div className="flex items-center gap-2">
+            <span className="text-slate-400 font-medium">Certificate ID:</span>
+            <span className="font-mono font-bold text-white bg-slate-800 px-2 py-1 rounded border border-slate-700">
+              {certificate.id}
+            </span>
+            <button
+              onClick={handleCopyId}
+              className="p-1 hover:text-cyan-400 text-slate-400 transition-colors"
+              title="Copy Certificate ID"
+            >
+              {copiedId ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+            </button>
+          </div>
+
+          {/* Verification Link & Scanner */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium text-xs transition-colors"
+            >
+              {copiedLink ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+              <span>{copiedLink ? 'Link Copied!' : 'Copy Verify Link'}</span>
+            </button>
+
+            <a
+              href={certificate.verificationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-cyan-300 border border-cyan-500/30 font-medium text-xs transition-colors"
+            >
+              <ShieldCheck size={14} />
+              <span>Verify Online</span>
+              <ExternalLink size={12} />
+            </a>
+
+            <a
+              href="/verify"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 font-medium text-xs transition-colors"
+              title="Open QR Scanner"
+            >
+              <Camera size={14} />
+              <span>Verify Scanner</span>
+            </a>
+          </div>
         </div>
 
         {/* Scrollable Certificate View Area */}
@@ -104,23 +187,9 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
 
         {/* Bottom Actions Bar */}
         <div className="bg-white px-6 py-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleCopyLink}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors"
-            >
-              {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
-              <span>{copied ? 'Link Copied!' : 'Copy Verification URL'}</span>
-            </button>
-            <a
-              href={certificate.verificationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-blue-600 hover:underline font-medium"
-            >
-              <span>Open Verify Page</span>
-              <ExternalLink size={12} />
-            </a>
+          <div className="flex items-center gap-2 text-xs text-slate-500">
+            <ShieldCheck size={15} className="text-emerald-600" />
+            <span>Official digital credential with cryptographic QR verification</span>
           </div>
 
           <div className="flex items-center gap-3">
