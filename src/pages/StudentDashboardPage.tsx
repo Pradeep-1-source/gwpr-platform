@@ -110,41 +110,41 @@ export const StudentDashboardPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
       {/* Top Banner / Student Welcome */}
-      <section className="bg-[#0B192C] text-white py-10 sm:py-14 border-b border-slate-800">
+      <section className="bg-gradient-to-b from-[#F1F5F9] via-[#FAF9F6] to-white text-slate-900 py-10 sm:py-14 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <img
                 src={student.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
                 alt={student.fullName}
-                className="w-16 h-16 rounded-2xl object-cover ring-2 ring-blue-500/50 shadow-md"
+                className="w-16 h-16 rounded-2xl object-cover ring-2 ring-blue-500/30 shadow-md"
               />
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                     {student.fullName}
                   </h1>
-                  <span className="text-[10px] font-semibold uppercase tracking-wider bg-blue-500/20 text-cyan-300 px-2 py-0.5 rounded border border-blue-400/30">
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
                     Student ID: {student.id.substring(0, 10)}
                   </span>
                 </div>
-                <p className="text-xs text-slate-400">{student.email} • {student.mobile}</p>
+                <p className="text-xs text-slate-500">{student.email} • {student.mobile}</p>
               </div>
             </div>
 
             {/* Quick Metrics */}
             <div className="flex items-center gap-3">
-              <div className="bg-slate-800/80 px-4 py-2.5 rounded-xl border border-slate-700 text-center">
-                <span className="text-xs text-slate-400 block">Enrolled</span>
-                <strong className="text-lg text-white font-bold">{enrollments.length}</strong>
+              <div className="bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-center shadow-xs">
+                <span className="text-xs text-slate-500 block">Enrolled</span>
+                <strong className="text-lg text-slate-900 font-bold">{enrollments.length}</strong>
               </div>
-              <div className="bg-slate-800/80 px-4 py-2.5 rounded-xl border border-slate-700 text-center">
-                <span className="text-xs text-slate-400 block">Completed</span>
-                <strong className="text-lg text-emerald-400 font-bold">{completedCount}</strong>
+              <div className="bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-center shadow-xs">
+                <span className="text-xs text-slate-500 block">Completed</span>
+                <strong className="text-lg text-emerald-600 font-bold">{completedCount}</strong>
               </div>
-              <div className="bg-slate-800/80 px-4 py-2.5 rounded-xl border border-slate-700 text-center">
-                <span className="text-xs text-slate-400 block">Certificates</span>
-                <strong className="text-lg text-cyan-400 font-bold">{certificates.length}</strong>
+              <div className="bg-white px-4 py-2.5 rounded-xl border border-slate-200 text-center shadow-xs">
+                <span className="text-xs text-slate-500 block">Certificates</span>
+                <strong className="text-lg text-blue-600 font-bold">{certificates.length}</strong>
               </div>
             </div>
           </div>

@@ -307,25 +307,25 @@ CREATE POLICY "Full access enrollments" ON public.enrollments FOR ALL USING (tru
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
       {/* Top Banner */}
-      <section className="bg-[#0B192C] text-white py-10 border-b border-slate-800">
+      <section className="bg-gradient-to-b from-[#F1F5F9] via-[#FAF9F6] to-white text-slate-900 py-10 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30 mb-2">
-                <ShieldAlert size={14} />
-                <span>Unsecured Frontend Prototype Demo Mode</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 mb-2">
+                <ShieldAlert size={14} className="text-amber-700" />
+                <span>Admin Demonstration Workspace</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-bold font-serif text-white">
-                Admin Demonstration Workspace
+              <h1 className="text-2xl sm:text-3xl font-bold font-serif text-slate-900">
+                Administration Portal
               </h1>
-              <p className="text-xs text-slate-400 mt-1">
-                Manage demo courses, inspect LocalStorage enrollments, search issued certificates, and configure branding.
+              <p className="text-xs text-slate-600 mt-1">
+                Manage courses, inspect student enrollments, search issued certificates, and configure branding.
               </p>
             </div>
 
             <button
               onClick={() => setResetModalOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-semibold border border-slate-700 transition-colors self-start md:self-auto"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-amber-700 text-xs font-semibold border border-amber-200 transition-colors self-start md:self-auto shadow-sm"
             >
               <RotateCcw size={15} />
               <span>Reset All Demo Data</span>

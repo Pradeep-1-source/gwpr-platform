@@ -52,17 +52,17 @@ export const ContactPage: React.FC = () => {
   return (
     <div className="space-y-16 pb-20">
       {/* Header */}
-      <section className="bg-[#0B192C] text-white py-16 sm:py-20 border-b border-slate-800 relative overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+      <section className="bg-gradient-to-b from-[#F1F5F9] via-[#FAF9F6] to-white text-slate-900 py-16 sm:py-20 border-b border-slate-200 relative overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-blue-100/60 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-cyan-400 border border-cyan-500/30">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
             <Sparkles size={14} />
             <span>Connect with GWPR</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-white">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-slate-900">
             Contact & Consultation Enquiry
           </h1>
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
             Have questions about digital transformation services, cohort admissions, or enterprise training programs? Reach out to our team.
           </p>
         </div>

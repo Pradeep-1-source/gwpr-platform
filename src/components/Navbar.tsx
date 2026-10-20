@@ -4,14 +4,8 @@ import {
   Menu,
   X,
   ShieldCheck,
-  User,
   LogOut,
   GraduationCap,
-  Sparkles,
-  Layers,
-  Phone,
-  BookOpen,
-  Info,
 } from 'lucide-react';
 import { authService } from '../services/authService';
 import { DemoStudent } from '../types';
@@ -46,7 +40,7 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0B192C]/95 backdrop-blur-md border-b border-slate-800 text-white shadow-lg transition-all duration-200">
+    <header className="sticky top-0 z-50 bg-[#FAF9F6]/95 backdrop-blur-md border-b border-slate-200 text-slate-800 shadow-xs transition-all duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo & Brand */}
@@ -57,10 +51,10 @@ export const Navbar: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-white flex items-center gap-1.5">
-                GWPR <span className="text-cyan-400 font-semibold text-sm sm:text-base">PVT LTD</span>
+              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 flex items-center gap-1.5">
+                GWPR <span className="text-blue-600 font-semibold text-sm sm:text-base">PVT LTD</span>
               </span>
-              <span className="text-[10px] tracking-wider text-slate-400 uppercase font-medium">
+              <span className="text-[10px] tracking-wider text-slate-500 uppercase font-semibold">
                 Tech & Career Platform
               </span>
             </div>
@@ -75,8 +69,8 @@ export const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   `px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'text-cyan-400 bg-white/5 font-semibold'
-                      : 'text-slate-300 hover:text-white hover:bg-white/5'
+                      ? 'text-blue-600 bg-blue-50 font-bold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`
                 }
               >
@@ -90,10 +84,10 @@ export const Navbar: React.FC = () => {
             {/* Verify Quick Button */}
             <Link
               to="/verify"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-800/80 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 transition-all hover:border-cyan-400/50 shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition-all shadow-xs"
               title="Verify Course Certificate"
             >
-              <ShieldCheck size={15} className="text-cyan-400" />
+              <ShieldCheck size={15} className="text-emerald-600" />
               <span>Verify Cert</span>
             </Link>
 
@@ -114,7 +108,7 @@ export const Navbar: React.FC = () => {
                 <button
                   onClick={handleLogout}
                   title="Logout"
-                  className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-white/5 transition-colors"
+                  className="p-2 text-slate-400 hover:text-red-500 rounded-lg hover:bg-slate-100 transition-colors"
                 >
                   <LogOut size={16} />
                 </button>
@@ -123,34 +117,33 @@ export const Navbar: React.FC = () => {
               <div className="flex items-center gap-2">
                 <Link
                   to="/login"
-                  className="px-3.5 py-2 text-xs font-semibold rounded-lg text-slate-200 hover:text-white hover:bg-white/5 transition-colors"
+                  className="px-3.5 py-2 text-xs font-semibold rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
                 >
                   Student Login
                 </Link>
                 <Link
                   to="/register"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-md shadow-blue-500/20 transition-all"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-500/20 transition-all"
                 >
                   <GraduationCap size={15} />
                   <span>Register</span>
                 </Link>
               </div>
             )}
-
           </div>
 
           {/* Mobile Hamburger Button */}
           <div className="lg:hidden flex items-center gap-2">
             <Link
               to="/verify"
-              className="p-2 text-cyan-400 hover:bg-slate-800 rounded-lg"
+              className="p-2 text-emerald-600 hover:bg-slate-100 rounded-lg"
               title="Verify Certificate"
             >
               <ShieldCheck size={20} />
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none"
+              className="p-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -161,7 +154,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0B192C] border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-4 duration-200">
+        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-4 duration-200 shadow-lg">
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => (
               <NavLink
@@ -171,8 +164,8 @@ export const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   `px-3 py-2.5 rounded-lg text-sm font-medium ${
                     isActive
-                      ? 'bg-blue-600/20 text-cyan-400 font-semibold'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                      ? 'bg-blue-50 text-blue-600 font-bold'
+                      : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
                   }`
                 }
               >
@@ -181,18 +174,18 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
 
-          <div className="pt-4 border-t border-slate-800 space-y-2">
+          <div className="pt-4 border-t border-slate-200 space-y-2">
             {student ? (
               <div className="space-y-2">
-                <div className="flex items-center gap-3 px-3 py-2 bg-slate-800/60 rounded-lg">
+                <div className="flex items-center gap-3 px-3 py-2 bg-slate-50 rounded-lg border border-slate-200">
                   <img
                     src={student.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
                     alt={student.fullName}
                     className="w-8 h-8 rounded-full object-cover"
                   />
                   <div className="overflow-hidden">
-                    <p className="text-sm font-semibold text-white truncate">{student.fullName}</p>
-                    <p className="text-xs text-slate-400 truncate">{student.email}</p>
+                    <p className="text-sm font-semibold text-slate-900 truncate">{student.fullName}</p>
+                    <p className="text-xs text-slate-500 truncate">{student.email}</p>
                   </div>
                 </div>
                 <Link
@@ -204,7 +197,7 @@ export const Navbar: React.FC = () => {
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-slate-800 text-red-400 hover:bg-slate-700 font-medium text-sm"
+                  className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-slate-100 text-red-600 hover:bg-slate-200 font-medium text-sm"
                 >
                   <LogOut size={16} />
                   <span>Logout</span>
@@ -215,14 +208,14 @@ export const Navbar: React.FC = () => {
                 <Link
                   to="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center py-2.5 px-3 rounded-lg bg-slate-800 text-white font-medium text-sm text-center border border-slate-700"
+                  className="flex items-center justify-center py-2.5 px-3 rounded-lg bg-slate-100 text-slate-800 font-medium text-sm text-center border border-slate-200 hover:bg-slate-200"
                 >
                   Student Login
                 </Link>
                 <Link
                   to="/register"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center py-2.5 px-3 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium text-sm text-center"
+                  className="flex items-center justify-center py-2.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm text-center shadow-sm"
                 >
                   Register
                 </Link>

@@ -92,19 +92,19 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden flex flex-col max-h-[95vh] border border-slate-700 animate-in fade-in zoom-in-95 duration-200">
         
         {/* Modal Top Bar */}
-        <div className="bg-[#0B192C] text-white px-5 py-3.5 flex items-center justify-between border-b border-slate-800">
+        <div className="bg-[#FAF9F6] text-slate-900 px-5 py-3.5 flex items-center justify-between border-b border-slate-200">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-cyan-400 shadow-inner">
+            <div className="w-9 h-9 rounded-xl bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-600 shadow-inner">
               <Award size={20} />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-sm sm:text-base">Certificate Issued</h3>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase">
+                <h3 className="font-bold text-sm sm:text-base text-slate-900">Certificate Issued</h3>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 uppercase">
                   Verified
                 </span>
               </div>
-              <p className="text-xs text-slate-400 font-mono">ID: {certificate.id}</p>
+              <p className="text-xs text-slate-500 font-mono">ID: {certificate.id}</p>
             </div>
           </div>
 
@@ -119,7 +119,7 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
             </button>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+              className="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-200/50 transition-colors"
               aria-label="Close modal"
             >
               <X size={20} />
@@ -128,19 +128,19 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
         </div>
 
         {/* Credentials & Verification Banner (ID, Scanner, Link) */}
-        <div className="bg-slate-900 text-slate-200 px-5 py-3 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="bg-white text-slate-800 px-5 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
           {/* Certificate ID */}
           <div className="flex items-center gap-2">
-            <span className="text-slate-400 font-medium">Certificate ID:</span>
-            <span className="font-mono font-bold text-white bg-slate-800 px-2 py-1 rounded border border-slate-700">
+            <span className="text-slate-500 font-medium">Certificate ID:</span>
+            <span className="font-mono font-bold text-slate-900 bg-[#FAF9F6] px-2 py-1 rounded border border-slate-300">
               {certificate.id}
             </span>
             <button
               onClick={handleCopyId}
-              className="p-1 hover:text-cyan-400 text-slate-400 transition-colors"
+              className="p-1 hover:text-blue-600 text-slate-500 transition-colors"
               title="Copy Certificate ID"
             >
-              {copiedId ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+              {copiedId ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
             </button>
           </div>
 
@@ -148,9 +148,9 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={handleCopyLink}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium text-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FAF9F6] hover:bg-slate-100 text-slate-800 border border-slate-300 font-medium text-xs transition-colors"
             >
-              {copiedLink ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+              {copiedLink ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
               <span>{copiedLink ? 'Link Copied!' : 'Copy Verify Link'}</span>
             </button>
 
@@ -158,7 +158,7 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
               href={certificate.verificationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-cyan-300 border border-cyan-500/30 font-medium text-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-medium text-xs transition-colors"
             >
               <ShieldCheck size={14} />
               <span>Verify Online</span>
@@ -169,7 +169,7 @@ export const CertificatePDFGenerator: React.FC<CertificatePDFGeneratorProps> = (
               href="/verify"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 font-medium text-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-medium text-xs transition-colors"
               title="Open QR Scanner"
             >
               <Camera size={14} />

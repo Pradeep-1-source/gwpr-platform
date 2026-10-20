@@ -26,17 +26,17 @@ export const ServicesPage: React.FC = () => {
   return (
     <div className="space-y-16 pb-20">
       {/* Header */}
-      <section className="bg-[#0B192C] text-white py-16 sm:py-20 border-b border-slate-800 relative overflow-hidden">
-        <div className="absolute top-0 right-10 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+      <section className="bg-gradient-to-b from-[#F1F5F9] via-[#FAF9F6] to-white text-slate-900 py-16 sm:py-20 border-b border-slate-200 relative overflow-hidden">
+        <div className="absolute top-0 right-10 w-80 h-80 bg-blue-100/60 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-cyan-400 border border-cyan-500/30">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
             <Sparkles size={14} />
             <span>Enterprise Services</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-white">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-slate-900">
             Digital Engineering & Performance Marketing Services
           </h1>
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
             High-velocity web development, scalable e-commerce infrastructure, user experience design, and data-driven client acquisition funnels tailored for businesses.
           </p>
         </div>
@@ -79,17 +79,17 @@ export const ServicesPage: React.FC = () => {
         </div>
 
         {/* Custom Project CTA Box */}
-        <div className="bg-gradient-to-r from-blue-900 via-slate-900 to-[#0B192C] text-white rounded-3xl p-8 sm:p-10 border border-slate-800 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-gradient-to-r from-[#FAF9F6] via-[#F1F5F9] to-white text-slate-900 rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold">Need a Custom Technical Architecture or SLA?</h3>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900">Need a Custom Technical Architecture or SLA?</h3>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl">
               Discuss your tech stack, system requirements, or monthly support retainer directly with a GWPR solution architect.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => handleEnquire('Custom Enterprise Requirement')}
-              className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition-all shadow-md"
+              className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-all shadow-md"
             >
               Request Proposal
             </button>

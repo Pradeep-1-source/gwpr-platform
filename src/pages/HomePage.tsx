@@ -101,32 +101,32 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-20 pb-20 overflow-hidden">
       {/* 1. HERO SECTION */}
-      <section className="relative bg-[#0B192C] text-white pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden border-b border-slate-800">
+      <section className="relative bg-gradient-to-b from-[#F1F5F9] via-[#FAF9F6] to-white text-slate-900 pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden border-b border-slate-200">
         {/* Ambient Glows */}
-        <div className="absolute top-1/4 -left-40 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/4 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[140px] pointer-events-none" />
 
         {/* Tech Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b18_1px,transparent_1px),linear-gradient(to_bottom,#1e293b18_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#cbd5e125_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e125_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Column: Headline and CTAs */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-cyan-400 border border-cyan-500/30">
-                <Sparkles size={14} className="text-cyan-400" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                <Sparkles size={14} className="text-blue-600" />
                 <span>GWPR Private Limited — Corporate & Student Career Portal</span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight font-serif">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight font-serif">
                 Build Skills. Earn Certifications.{' '}
-                <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-600 bg-clip-text text-transparent">
                   Shape Your Career.
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 GWPR Private Limited empowers students and professionals with industry-focused technical training, career development programs, digital marketing, and website development services.
               </p>
 
@@ -134,7 +134,7 @@ export const HomePage: React.FC = () => {
               <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
                 <Link
                   to="/courses"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-blue-500/25 transition-all hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-0.5"
                 >
                   <BookOpen size={18} />
                   <span>Explore Courses</span>
@@ -143,89 +143,89 @@ export const HomePage: React.FC = () => {
 
                 <Link
                   to={student ? '/dashboard' : '/login'}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition-all hover:-translate-y-0.5 shadow-sm"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm border border-slate-300 transition-all hover:-translate-y-0.5 shadow-sm"
                 >
-                  <GraduationCap size={18} className="text-cyan-400" />
+                  <GraduationCap size={18} className="text-blue-600" />
                   <span>{student ? 'Student Dashboard' : 'Student Login'}</span>
                 </Link>
 
                 <Link
                   to="/verify"
-                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-transparent hover:bg-white/5 text-cyan-300 font-semibold text-sm border border-cyan-500/40 transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-sm border border-slate-300 transition-colors"
                 >
-                  <ShieldCheck size={18} className="text-emerald-400" />
+                  <ShieldCheck size={18} className="text-emerald-600" />
                   <span>Verify Certificate</span>
                 </Link>
               </div>
 
-              {/* Honest Metric Highlights (Real to platform capabilities) */}
-              <div className="pt-8 border-t border-slate-800 grid grid-cols-3 gap-4 text-center lg:text-left">
+              {/* Honest Metric Highlights */}
+              <div className="pt-8 border-t border-slate-200 grid grid-cols-3 gap-4 text-center lg:text-left">
                 <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-white">11 Tracks</div>
-                  <div className="text-xs text-slate-400 mt-0.5">Software, Cloud & AI</div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">11 Tracks</div>
+                  <div className="text-xs text-slate-500 mt-0.5">Software, Cloud & AI</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-cyan-400">Verifiable</div>
-                  <div className="text-xs text-slate-400 mt-0.5">QR Code Validation</div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-blue-600">Verifiable</div>
+                  <div className="text-xs text-slate-500 mt-0.5">QR Code Validation</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400">9 Services</div>
-                  <div className="text-xs text-slate-400 mt-0.5">Enterprise Solutions</div>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600">9 Services</div>
+                  <div className="text-xs text-slate-500 mt-0.5">Enterprise Solutions</div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Hero Visual Card (Interactive Portal Preview) */}
+            {/* Right Column: Hero Visual Card */}
             <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none rounded-2xl bg-gradient-to-b from-slate-800/90 to-slate-900/95 p-6 border border-slate-700/80 shadow-2xl backdrop-blur-xl space-y-5">
+              <div className="relative mx-auto max-w-md lg:max-w-none rounded-2xl bg-white p-6 border border-slate-200 shadow-xl backdrop-blur-xl space-y-5">
                 
                 {/* Visual Header */}
-                <div className="flex items-center justify-between pb-4 border-b border-slate-700">
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-blue-600/30 border border-blue-400/30 flex items-center justify-center text-cyan-400">
+                    <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
                       <Award size={20} />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white">GWPR Career Portal</h4>
-                      <p className="text-[11px] text-cyan-400">Live Interactive Learning & Credentialing</p>
+                      <h4 className="text-sm font-bold text-slate-900">GWPR Career Portal</h4>
+                      <p className="text-[11px] text-blue-600 font-medium">Live Interactive Learning & Credentialing</p>
                     </div>
                   </div>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                     Active Cohort
                   </span>
                 </div>
 
                 {/* Simulated Student Progress Widget */}
-                <div className="bg-slate-950/70 rounded-xl p-4 border border-slate-800 space-y-3">
+                <div className="bg-[#FAF9F6] rounded-xl p-4 border border-slate-200 space-y-3">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-200">Machine Learning (ML)</span>
-                    <span className="text-emerald-400 font-bold">100% Completed</span>
+                    <span className="font-semibold text-slate-800">Machine Learning (ML)</span>
+                    <span className="text-emerald-700 font-bold">100% Completed</span>
                   </div>
-                  <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                    <div className="bg-gradient-to-r from-blue-500 to-emerald-400 h-full w-full rounded-full" />
+                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                    <div className="bg-gradient-to-r from-blue-600 to-emerald-500 h-full w-full rounded-full" />
                   </div>
-                  <div className="flex items-center justify-between text-[11px] text-slate-400">
+                  <div className="flex items-center justify-between text-[11px] text-slate-500">
                     <span>6 of 6 Lessons Completed</span>
-                    <span className="text-cyan-300 font-medium">Eligible for Certificate</span>
+                    <span className="text-blue-700 font-medium">Eligible for Certificate</span>
                   </div>
                 </div>
 
                 {/* Instant Verification Registry */}
-                <div className="bg-slate-950/70 rounded-xl p-4 border border-slate-800 space-y-3">
+                <div className="bg-[#FAF9F6] rounded-xl p-4 border border-slate-200 space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="p-1.5 bg-blue-600/20 text-cyan-400 rounded-lg border border-cyan-500/30">
+                    <div className="p-1.5 bg-blue-50 text-blue-600 rounded-lg border border-blue-200">
                       <ShieldCheck size={28} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-white">Credential Verification System</span>
+                        <span className="text-xs font-bold text-slate-900">Credential Verification System</span>
                       </div>
-                      <p className="text-[11px] text-slate-400 truncate">QR Scanner & Online Registry</p>
+                      <p className="text-[11px] text-slate-500 truncate">QR Scanner & Online Registry</p>
                     </div>
                   </div>
                   <Link
                     to="/verify"
-                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs shadow-md transition-colors"
+                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-md transition-colors"
                   >
                     <span>Verify Credential Authenticity</span>
                     <ArrowRight size={13} />
@@ -233,17 +233,17 @@ export const HomePage: React.FC = () => {
                 </div>
 
                 {/* Bottom Quick Feature Badges */}
-                <div className="flex items-center justify-around text-center text-xs text-slate-400 pt-1">
+                <div className="flex items-center justify-around text-center text-xs text-slate-500 pt-1">
                   <div className="flex items-center gap-1">
-                    <CheckCircle2 size={13} className="text-emerald-400" />
+                    <CheckCircle2 size={13} className="text-emerald-600" />
                     <span>Self-Paced</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <CheckCircle2 size={13} className="text-emerald-400" />
+                    <CheckCircle2 size={13} className="text-emerald-600" />
                     <span>Real Projects</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <CheckCircle2 size={13} className="text-emerald-400" />
+                    <CheckCircle2 size={13} className="text-emerald-600" />
                     <span>PDF & Print</span>
                   </div>
                 </div>
@@ -305,14 +305,14 @@ export const HomePage: React.FC = () => {
 
             <div className="lg:col-span-6 grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="bg-gradient-to-br from-blue-900 to-[#0B192C] text-white p-6 rounded-2xl shadow-md space-y-3">
-                  <Code2 size={28} className="text-cyan-400" />
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50/70 text-slate-900 border border-blue-200/70 p-6 rounded-2xl shadow-sm space-y-3">
+                  <Code2 size={28} className="text-blue-600" />
                   <h4 className="font-bold text-base">Practical-First Focus</h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     Every module integrates realistic code repositories, exercises, and deployment patterns over passive theory.
                   </p>
                 </div>
-                <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3">
+                <div className="bg-[#FAF9F6] border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
                   <ShieldCheck size={28} className="text-emerald-600" />
                   <h4 className="font-bold text-base text-slate-900">Verifiable Credentials</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
@@ -322,17 +322,17 @@ export const HomePage: React.FC = () => {
               </div>
 
               <div className="space-y-4 pt-6">
-                <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3">
+                <div className="bg-[#FAF9F6] border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
                   <Laptop size={28} className="text-blue-600" />
                   <h4 className="font-bold text-base text-slate-900">Digital Solutions</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Full-spectrum web engineering, e-commerce architectures, UI/UX prototyping, and performance SEO.
                   </p>
                 </div>
-                <div className="bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-6 rounded-2xl shadow-md space-y-3">
-                  <Target size={28} className="text-amber-400" />
+                <div className="bg-gradient-to-br from-amber-50 to-orange-50/70 text-slate-900 border border-amber-200/70 p-6 rounded-2xl shadow-sm space-y-3">
+                  <Target size={28} className="text-amber-600" />
                   <h4 className="font-bold text-base">Honest Transparency</h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     Clear demarcation of skills, realistic timelines, and no deceptive placement guarantees.
                   </p>
                 </div>
@@ -409,7 +409,7 @@ export const HomePage: React.FC = () => {
           <div className="text-center pt-2">
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0B192C] hover:bg-slate-800 text-white font-semibold text-xs shadow-md transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-md transition-all"
             >
               <span>Explore All 9 Enterprise Services</span>
               <ArrowRight size={15} />
@@ -481,20 +481,20 @@ export const HomePage: React.FC = () => {
 
       {/* 6. CERTIFICATE VERIFICATION HIGHLIGHT BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-[#0B192C] via-[#102A43] to-[#0B192C] rounded-3xl p-8 sm:p-12 text-white border border-slate-700 shadow-xl relative overflow-hidden">
-          <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-cyan-500/10 blur-3xl pointer-events-none" />
+        <div className="bg-gradient-to-br from-[#FAF9F6] via-[#F1F5F9] to-white rounded-3xl p-8 sm:p-12 text-slate-900 border border-slate-200 shadow-xl relative overflow-hidden">
+          <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-blue-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-              <ShieldCheck size={14} />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
+              <ShieldCheck size={14} className="text-emerald-700" />
               <span>Tamper-Resistant Credential Verification</span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
               Instantly Verify Any GWPR Certificate
             </h2>
 
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed">
               Employers, hiring managers, and students can authenticate credentials by entering the unique Certificate ID or scanning the embedded QR code.
             </p>
 
@@ -507,20 +507,20 @@ export const HomePage: React.FC = () => {
                   value={verifyInput}
                   onChange={(e) => setVerifyInput(e.target.value)}
                   placeholder="Enter Certificate ID"
-                  className="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-700 rounded-xl text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 font-mono uppercase"
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono uppercase shadow-sm"
                 />
               </div>
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-xs sm:text-sm shadow-md transition-all shrink-0"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold text-xs sm:text-sm shadow-md transition-all shrink-0"
               >
                 <span>Verify Now</span>
                 <ArrowRight size={15} />
               </button>
             </form>
 
-            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-400">
-              <Link to="/verify" className="text-emerald-400 hover:underline flex items-center gap-1 font-medium">
+            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-600">
+              <Link to="/verify" className="text-blue-700 hover:underline flex items-center gap-1 font-semibold">
                 <Camera size={14} />
                 <span>Open Camera QR Scanner</span>
                 <ArrowRight size={12} />

@@ -100,17 +100,17 @@ export const CertificateVerificationPage: React.FC = () => {
   return (
     <div className="space-y-12 pb-20">
       {/* Header */}
-      <section className="bg-[#0B192C] text-white py-16 sm:py-20 border-b border-slate-800 relative overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-80 h-80 bg-cyan-600/15 rounded-full blur-3xl pointer-events-none" />
+      <section className="bg-gradient-to-b from-[#F1F5F9] via-[#FAF9F6] to-white text-slate-900 py-16 sm:py-20 border-b border-slate-200 relative overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-blue-100/60 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
             <ShieldCheck size={16} />
             <span>Official Credential Verification Registry</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-white">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-slate-900">
             Verify GWPR Certificate Authenticity
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
             Validate the integrity, completion status, and official issuance of credentials awarded by GWPR Private Limited.
           </p>
         </div>

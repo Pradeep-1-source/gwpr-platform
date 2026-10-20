@@ -21,17 +21,17 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="space-y-16 pb-20">
       {/* Page Header */}
-      <section className="bg-[#0B192C] text-white py-16 sm:py-20 border-b border-slate-800 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+      <section className="bg-gradient-to-b from-[#F1F5F9] via-[#FAF9F6] to-white text-slate-900 py-16 sm:py-20 border-b border-slate-200 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/60 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-cyan-400 border border-cyan-500/30">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
             <Sparkles size={14} />
             <span>About Us</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-white">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-serif text-slate-900">
             Engineering Digital Systems & Empowering Tech Professionals
           </h1>
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
             GWPR Private Limited is a modern technology organisation operating at the intersection of enterprise software engineering, digital transformation, and practical technical career development.
           </p>
         </div>
@@ -74,45 +74,45 @@ export const AboutPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#0B192C] to-slate-900 text-white p-8 rounded-3xl border border-slate-700 shadow-xl space-y-6">
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <ShieldCheck size={22} className="text-cyan-400" />
+          <div className="lg:col-span-5 bg-gradient-to-br from-[#FAF9F6] to-white text-slate-900 p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+            <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <ShieldCheck size={22} className="text-blue-600" />
               <span>Core Company Commitments</span>
             </h3>
 
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-bold text-slate-200">Zero Fabricated Claims</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <h4 className="text-xs font-bold text-slate-900">Zero Fabricated Claims</h4>
+                  <p className="text-xs text-slate-600 mt-0.5">
                     We maintain absolute transparency regarding our curriculum, company credentials, and prototype features.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-bold text-slate-200">Production-Grade Standards</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <h4 className="text-xs font-bold text-slate-900">Production-Grade Standards</h4>
+                  <p className="text-xs text-slate-600 mt-0.5">
                     Our digital services adopt modern tools like React, TypeScript, and cloud-native architecture.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-bold text-slate-200">Verifiable Learning Credentials</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <h4 className="text-xs font-bold text-slate-900">Verifiable Learning Credentials</h4>
+                  <p className="text-xs text-slate-600 mt-0.5">
                     Every certificate includes unique IDs and dynamic QR codes for public validation.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-slate-700 text-xs text-slate-400">
+            <div className="pt-2 border-t border-slate-200 text-xs text-slate-500">
               <p>Corporate CIN: U72900KA2024PTC189234</p>
             </div>
           </div>
